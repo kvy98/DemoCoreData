@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName="Category" syncable="YES">
+        <attribute name="cate_description" optional="YES" attributeType="String"/>
+        <attribute name="cate_name" optional="YES" attributeType="String"/>
+        <relationship name="child" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="parent" inverseEntity="Category"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="child" inverseEntity="Category"/>
+        <relationship name="product" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Product" inverseName="category" inverseEntity="Product"/>
+    </entity>
+    <entity name="Color" representedClassName="Color" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="String"/>
+        <relationship name="product_inventory_detail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductInventory" inverseName="color" inverseEntity="ProductInventory"/>
+    </entity>
+    <entity name="Order" representedClassName="Order" syncable="YES">
+        <attribute name="order_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="order_detail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OrderDetail" inverseName="order" inverseEntity="OrderDetail"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="order" inverseEntity="User"/>
+    </entity>
+    <entity name="OrderDetail" representedClassName="OrderDetail" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="order_detail_quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="size" optional="YES" attributeType="String"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="order_detail" inverseEntity="Order"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="order_detail" inverseEntity="Product"/>
+    </entity>
+    <entity name="Product" representedClassName="Product" syncable="YES">
+        <attribute name="product_image" optional="YES" attributeType="String"/>
+        <attribute name="product_name" optional="YES" attributeType="String"/>
+        <attribute name="product_price" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="product" inverseEntity="Category"/>
+        <relationship name="order_detail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OrderDetail" inverseName="product" inverseEntity="OrderDetail"/>
+        <relationship name="product_inventory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductInventory" inverseName="product" inverseEntity="ProductInventory"/>
+    </entity>
+    <entity name="ProductInventory" representedClassName="ProductInventory" syncable="YES">
+        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="color" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Color" inverseName="product_inventory_detail" inverseEntity="Color"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="product_inventory" inverseEntity="Product"/>
+        <relationship name="size" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Size" inverseName="product_inventory_detail" inverseEntity="Size"/>
+    </entity>
+    <entity name="Size" representedClassName="Size" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="String"/>
+        <relationship name="product_inventory_detail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductInventory" inverseName="size" inverseEntity="ProductInventory"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
+        <relationship name="order" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="user" inverseEntity="Order"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="649.3046875" positionY="2217.37890625" width="128" height="118"/>
+        <element name="Color" positionX="1149.265625" positionY="2092.3203125" width="128" height="88"/>
+        <element name="Order" positionX="882.96484375" positionY="2056.4921875" width="128" height="88"/>
+        <element name="OrderDetail" positionX="885.859375" positionY="2223.5390625" width="128" height="118"/>
+        <element name="Product" positionX="706.82421875" positionY="2460.93359375" width="128" height="133"/>
+        <element name="ProductInventory" positionX="969.2109375" positionY="2395.50390625" width="151.21875" height="103"/>
+        <element name="Size" positionX="1216.46484375" positionY="2479.5390625" width="128" height="73"/>
+        <element name="User" positionX="603.46875" positionY="2060.36328125" width="128" height="88"/>
+    </elements>
+</model>
